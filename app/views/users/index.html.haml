@@ -1,0 +1,52 @@
+.page-header
+  <h1>Список пользователей</h1>
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th
+        .fa.fa-envelope.li
+          Эл. почта
+      %th
+        .fa.fa-key.li
+          Пароль
+      %th
+        .fa.fa-phone.li
+          Номер телефона
+      %th
+        .fa.fa-home.li
+          Адрес
+      %th
+        .fa.fa-street-view.li
+          Роль
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.password
+        %td= user.phone_number
+        %td= user.adress
+        %td= user.role
+        %td
+          = link_to user, class: "btn btn-link" do
+            =fa_icon "arrow-circle-right"
+            Показать
+        %td
+          = link_to edit_user_path(user), class: "btn btn-link" do
+            =fa_icon "edit"
+            Редактировать
+        %td
+          = link_to user, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-link" do
+            =fa_icon "remove"
+            Удалить
+
+.br
+
+= link_to new_user_path, class: "btn btn-primary" do
+  =fa_icon "user-plus"
+  Новый пользователь
+

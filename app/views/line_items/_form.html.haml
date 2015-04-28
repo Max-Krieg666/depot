@@ -1,0 +1,17 @@
+= form_for @line_item do |f|
+  =error_messages_for(@line_item)
+
+  .field
+    = f.label :quantity
+    = f.number_field :quantity
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :cart
+    = f.text_field :cart
+  .field
+    = f.label :product
+    = f.text_field :product
+  .actions
+    = f.submit 'Сохранить'

@@ -1,0 +1,28 @@
+= form_for @user do |f|
+  =error_messages_for(@user)
+  .form-group
+    .fa.fa-envelope.li
+    =f.label :email
+    =f.email_field :email, class: "form-control"
+  .form-group
+    .fa.fa-key.li
+    = f.label :password
+    = f.password_field :password, class: "form-control"
+  .form-group
+    .fa.fa-key
+    .fa.fa-key.li
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: "form-control"
+  .form-group
+    .fa.fa-phone.li
+    = f.label :phone_number
+    = f.text_field :phone_number, class: "form-control"
+  .form-group
+    .fa.fa-home.li
+    = f.label :adress
+    = f.text_area :adress, class: "form-control"
+  -#.form-group
+  -#  = f.label :role
+  -#  = f.number_field :role, class: "form-control"
+  .actions
+    = f.submit 'Зарегистрироваться', class: "btn btn-primary"

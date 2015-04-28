@@ -1,0 +1,85 @@
+-#%p#notice= notice
+.page-header
+  .fa.fa-shopping-cart.fa-4x.li
+    Ваша корзина
+
+.row
+  .col-md-3
+    .list-group
+      .list-group-item.active
+        .fa.fa-pencil.li
+          Название
+      .list-group-item
+        .fa.fa-info-circle.li
+          Описание
+      .list-group-item
+        .fa.fa-ruble.li
+          Цена
+      .list-group-item
+        .fa.fa-tags.li
+          Количество
+      .list-group-item
+        .fa.fa-download.li
+          Общий вес
+
+.row
+  - @cart.line_items.each do |item|
+    .col-md-3
+      .list-group
+        .list-group-item.active
+          .fa.fa-pencil.li
+            #{item.product.name}
+        .list-group-item
+          .fa.fa-info-circle.li
+            #{item.product.description}
+        .list-group-item
+          .fa.fa-ruble.li
+            #{number_to_currency(item.price*item.quantity, separator: ",", delimiter: "", format: "%n")}
+        .list-group-item
+          .fa.fa-tags.li
+            %span.btn.btn-group
+              =link_to line_item_path(id:item.id, place:"cart"), class: 'btn btn-default', data: {method: :delete, confirm: 'Вы уверены?'} do
+                =fa_icon "minus"
+              =link_to "#{item.quantity} шт", @cart, class: 'btn btn-default'
+              =link_to line_items_path(id:item.id, place:"cart"), class: 'btn btn-default', data: {method: :post} do
+                =fa_icon "plus"
+        .list-group-item
+          .fa.fa-download.li
+            #{number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})}
+
+.row
+  .col-md-4
+    .list-group
+      .list-group-item
+        .fa.fa-list.li
+          Итого:
+      .list-group-item
+        .fa.fa-info-circle.li
+          Всего товарных позиций: #{@cart.line_items.length}
+        .br
+        .li
+          Всего товаров:
+          -sum=0;@cart.line_items.each{|itm| sum+=itm.quantity}
+          #{sum}
+        .br
+        .li
+          Суммарный вес:
+          -sum=0;@cart.line_items.each{|item| sum+=item.product.weight*item.quantity}
+          #{number_to_human(sum, units: {unit: "г", thousand: "кг"})}
+      .list-group-item
+        .fa.fa-ruble.li
+          Цена:
+        -sum=0;@cart.line_items.each{|item| sum+=item.price*item.quantity}
+        #{number_to_currency(sum, separator: ",", delimiter: "", format: "%n")}
+
+-#= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
+= link_to @cart, data:{method: :delete, confirm: "Вы уверены?"}, class: "btn btn-primary" do
+  =fa_icon "times-circle"
+  Очистить корзину
+= link_to root_path, class: "btn btn-info" do
+  =fa_icon "external-link-square"
+  Вернуться к выбору товаров
+= link_to new_order_path, class: "btn btn-danger" do
+  =fa_icon "money"
+  Оформить заказ
+

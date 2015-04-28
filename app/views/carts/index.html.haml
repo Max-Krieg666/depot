@@ -1,0 +1,19 @@
+%h1 Список корзин
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @carts.each do |cart|
+      %tr
+        %td= link_to 'Показать', cart
+        %td= link_to 'Редактировать', edit_cart_path(cart)
+        %td= link_to 'Удалить', cart, :method => :delete, :data => { :confirm => 'Вы уверены?' }
+
+%br
+
+= link_to 'Новая корзина', new_cart_path

@@ -1,0 +1,20 @@
+= form_for @order do |f|
+  =error_messages_for(@order)
+
+  .field
+    = f.label :cart
+    = f.text_field :cart
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :address
+    = f.text_area :address
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :comment
+    = f.text_area :comment
+  .actions
+    = f.submit 'Сохранить'

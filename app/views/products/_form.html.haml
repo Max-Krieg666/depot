@@ -1,0 +1,29 @@
+= form_for @product do |f|
+  =error_messages_for(@product)
+  .row
+    .col-md-3
+      .form-group
+        =f.label :name
+        =f.text_field :name, class: "form-control"
+    .col-md-3
+      .form-group
+        =f.label :image
+        =f.file_field :image
+    .col-md-3
+      .form-group
+        =f.label :description
+        =f.text_area :description, class: "form-control"
+  .row
+    .col-md-3
+      .form-group
+        =f.label :price
+        .input-group
+          =f.text_field :price, class: "form-control"
+          %span.input-group-addon.glyphicon.glyphicon-ruble
+    .col-md-3
+      .form-group
+        =f.label :weight
+        .input-group
+          =f.text_field :weight, class: "form-control"
+          %span.input-group-addon г.
+  .actions=f.submit nil, class: "btn btn-primary"

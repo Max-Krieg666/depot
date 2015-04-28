@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%p
+  %b Корзина:
+  = @order.cart
+%p
+  %b Пользователь:
+  = @order.user.email
+  = link_to @order.user, class: "btn btn-link" do
+    =fa_icon "arrow-circle-right"
+    Показать
+%p
+  %b Адрес доставки:
+  = @order.address
+%p
+  %b Статус:
+  = status_view(@order.status)
+%p
+  %b Комментарий:
+  = @order.comment
+%p
+  %b Список товаров:
+  = @order.line_items
+
+= link_to 'Назад', orders_path

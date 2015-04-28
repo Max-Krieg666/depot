@@ -1,0 +1,8 @@
+#cart_info
+  -if cart
+    -if cart.line_items.blank?
+      .alert.alert-info
+        В корзине
+        =Russian.p(cart.total_line_items,'товар','товара','товаров')
+        на сумму
+        =number_to_currency(cart.total_amount)

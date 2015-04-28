@@ -1,0 +1,20 @@
+%nav.navbar.navbar-inverse
+  .container
+    .navbar-header
+      =link_to ?#, class: "navbar-toggle collapsed", data: {toggle: "collapse", target:"#menu"} do
+        =fa_icon 'bars'
+      =link_to "Магазин", root_path, class: "navbar-brand"
+    #menu.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to "Все товары", products_path
+        %li= link_to "Корзина", line_items_path
+      %ul.nav.navbar-nav.navbar-right
+        -if @current_user.blank?
+          %li= link_to "Войти", login_path
+        -else
+          %li
+            %span.navbar-text
+              .text-info=@current_user.email
+          %li
+            = link_to "Выйти", logout_path, data:{method: :patch}
+

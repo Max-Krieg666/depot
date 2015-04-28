@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Depot
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    =render 'navbar'
+    -#.row.pull-right.col-md-4{style: "white-space: nowrap"}
+    -#  .well-lg.fa.fa-chevron-circle-right.fa-2x
+    -#    -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
+    -#    -if @cart.line_items.blank?
+    -#      = link_to "Корзина пуста.", @cart, class: "btn btn-danger", style: "white-space:normal; width: 256px;"
+    -#    -else
+    -#      = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')}. Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "\u20BD", format: "%n %u")}", @cart, class: "btn btn-danger", style: "white-space:normal; width: 256px;"
+    .container
+      =show_cart(@cart) if @cart
+      =render 'flash_messages'
+      =yield

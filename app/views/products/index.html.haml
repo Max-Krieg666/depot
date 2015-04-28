@@ -1,0 +1,59 @@
+.page-header
+  <h1>Продукты</h1>
+
+.row.center
+  .col-md-3
+    .list-group
+      .list-group-item.active
+        .fa.fa-pencil.li
+          Название
+      .list-group-item
+        .fa.fa-info-circle.li
+          Описание
+      .list-group-item
+        .fa.fa-ruble.li
+          Цена
+      .list-group-item
+        .fa.fa-question-circle.li
+          Вес
+
+.row
+  - @products.each do |product|
+    .col-md-3
+      .list-group
+        .list-group-item.active
+          .fa.fa-pencil.li
+            #{product.name}
+        .list-group-item
+          .fa.fa-info-circle.li
+            #{product.description}
+        .list-group-item
+          .fa.fa-ruble.li
+            #{number_to_currency(product.price, separator: ",", delimiter: "", format: "%n")}
+        .list-group-item.li
+          .fa.fa-question-circle
+          #{number_to_human(product.weight, units: {unit: "г", thousand: "кг"})}
+        .list-group-item.li
+          = link_to product, class: "btn btn-link" do
+            =fa_icon "arrow-circle-right"
+            Показать
+        .list-group-item.li
+          = link_to edit_product_path(product), class: "btn btn-link" do
+            =fa_icon "edit"
+            Редактировать
+        .list-group-item.li
+          = link_to product, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-link" do
+            =fa_icon "remove"
+            Удалить
+        .list-group-item.li
+          = link_to line_items_path(product_id: product.id), class: "btn btn-link", data:{method: :post, remote: :true} do
+            =fa_icon "cart-plus"
+            Добавить в корзину
+
+.br
+
+= link_to new_product_path, class: "btn btn-primary" do
+  =fa_icon "plus"
+  Новый продукт
+.br
+= paginate @products
