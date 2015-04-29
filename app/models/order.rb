@@ -17,4 +17,11 @@ class Order < ActiveRecord::Base
       errors.add(:cart, "Корзина пуста!")
     end
   end
+  def add_lineitems(cart)
+    line_items=[]
+    cart.line_items.each do |l_i|
+      l_i.cart_id=nil
+      line_items << l_i
+    end
+  end
 end

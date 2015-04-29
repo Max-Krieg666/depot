@@ -32,7 +32,6 @@ class OrdersController < ApplicationController
     @order.status = 0
     @order.add_lineitems(@cart)
     if @order.save
-      Cart.destroy(session[:cart_id])
       session.delete(:cart_id)
       redirect_to root_path, notice: 'Заказ оформлен.'
     else
@@ -77,13 +76,5 @@ class OrdersController < ApplicationController
 
     def new_order_params
       params.require(:order).permit(:address)
-    end
-
-    def add_lineitems(cart)
-      line_items=[]
-      cart.line_items.each do |l_i|
-        l_i.cart_id=nil
-        line_items << l_i
-      end
     end
 end

@@ -11,7 +11,7 @@ module OrdersHelper
                                            ['Завершён', 4]]))
   end
   def status_view(status)
-    if !status
+    if status==0
       "Оформлен"
     elsif status==1
       "Подтверждён"
